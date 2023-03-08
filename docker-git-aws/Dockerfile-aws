@@ -1,0 +1,14 @@
+FROM alpine:edge
+
+LABEL com.cloudnatician.docker.ci.aws.version="2.11.0"
+LABEL com.cloudnatician.docker.ci.aws.release-date="2023-03-08"
+LABEL com.cloudnatician.docker.ci.aws.owner="Cloudnatician Engineering"
+
+RUN apk add --no-cache aws-cli
+RUN apk add --no-cache jq
+
+RUN rm -fr \
+  /usr/bin/aws_completer \
+  /usr/lib/python*/site-packages/awscli/data/ac.index \
+  /usr/lib/python*/site-packages/awscli/examples
+RUN find /usr/lib/python* -name completions-1*.json -delete

@@ -1,0 +1,21 @@
+FROM cloudnceng/ci-aws-base:2.11.0 as aws-base
+
+FROM docker:23.0.1-git
+COPY --from=aws-base /usr/local/aws-cli/ /usr/local/aws-cli/
+COPY --from=aws-base /usr/local/bin/ /usr/local/bin/
+
+LABEL com.cloudnatician.docker.ci.docker.aws.version="0.0.1"
+LABEL com.cloudnatician.docker.ci.docker.aws.release-date="2023-03-08"
+LABEL com.cloudnatician.docker.ci.docker.aws.owner="Cloudnatician Engineering"
+
+ARG APL_VERSION=v3.17
+ARG YQ_VERSION=v4.31.2
+ARG AWSCLI_VERSION=2.11.0
+
+RUN apk add -X "https://dl-cdn.alpinelinux.org/alpine/${APL_VERSION}/main" -u alpine-keys
+RUN apk update
+RUN apk add --no-cache python3 py3-pip
+RUN apk add --no-cache jq
+
+RUN wget -O /usr/bin/yq "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64"
+RUN chmod ugo+x /usr/bin/yq
