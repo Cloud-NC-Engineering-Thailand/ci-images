@@ -1,0 +1,15 @@
+FROM jenkins/inbound-agent:alpine-jdk11
+
+LABEL com.cloudnatician.docker.ci.agent.inbound.jenkins.version="0.0.1"
+LABEL com.cloudnatician.docker.ci.agent.inbound.jenkins.java.version="11.0"
+LABEL com.cloudnatician.docker.ci.agent.inbound.jenkins.release-date="2023-06-15"
+LABEL com.cloudnatician.docker.ci.agent.inbound.jenkins.owner="Cloudnatician Engineering"
+
+ARG APL_VERSION=v3.18.2
+# we need root access to use dind
+USER root
+
+RUN echo "@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+RUN apk add -X "https://dl-cdn.alpinelinux.org/alpine/${APL_VERSION}/main" -u alpine-keys
+RUN apk update
+RUN apk add --no-cache docker jq sudo which nodejs-current@edge npm@edge yarn

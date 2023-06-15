@@ -10,6 +10,7 @@ These images will be available to support CI/CD workflows across different cloud
 | cloudnceng/ci-aws:2.11.0 | AWS CLI Image
 | cloudnceng/ci-aws-base:2.11.0 | AWS CLI Based Image
 | cloudnceng/ci-docker-aws:0.0.1-aws2.11.0 | Docker and AWS CLI Image
+| cloudnceng/ci-jenkins-inbound-agent:alpine-jdk11-0.0.1 | Jenkins Inbound Agent with JDK11
 
 ## Help & Feedback
 Interacting with the community and the development team is a great way to
